@@ -1,0 +1,1 @@
+em++ index.cpp -s WASM=1 -o index.js --use-preload-plugins --bind

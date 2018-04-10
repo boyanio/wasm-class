@@ -1,0 +1,1 @@
+em++ index.cpp -s WASM=1 -std=c++11 -o index.js

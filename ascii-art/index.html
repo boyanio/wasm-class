@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>WebAssembly: ASCII art</title>
+</head>
+
+<body>
+    <input type="file" />
+
+    <div>
+        <div style="float: left; width: 49%; display: block">
+            <img style="width: 100%" />
+        </div>
+        <div style="float: right; width: 49%; display: block">
+            <pre id="output"></pre>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            document.querySelector('input').addEventListener('change', function () {
+
+                const reader = new FileReader();
+                reader.onload = function () {
+
+                    const inputBuffer = this.result;
+                    const inputArray = new Uint8Array(inputBuffer);
+
+                    // display the selected file in the image element
+                    const inputBlob = new Blob([inputArray]);
+                    document.querySelector('img').src = URL.createObjectURL(inputBlob);
+
+                    // create the ascii output
+                    FS.createDataFile('/', 'source.bmp', inputArray, true, true);
+                    Module.img_to_ascii();
+                    FS.unlink('/source.bmp');
+
+                    // show the output
+                    const output = FS.readFile('output.txt', { encoding: 'utf8' });
+                    document.querySelector('#output').innerText = output;
+                };
+                reader.readAsArrayBuffer(this.files[0]);
+
+            }, false);
+        })();
+    </script>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>WebAssembly: WebGL</title>
+    <style>
+        /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+
+        canvas {
+            border: 0px none;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+    <div>
+        <input type="checkbox" id="resize">Resize canvas
+        <input type="checkbox" id="pointerLock" checked>Lock/hide mouse pointer &nbsp;&nbsp;&nbsp;
+        <input type="button" value="Fullscreen" onclick="Module.requestFullscreen(document.getElementById('pointerLock').checked, 
+                                                                                document.getElementById('resize').checked)">
+    </div>
+    <script>
+        var Module = {
+            canvas: document.getElementById('canvas')
+        };
+    </script>
+    <script src="index.js"></script>
+</body>
+
+</html>
