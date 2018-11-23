@@ -1,0 +1,1 @@
+em++ index.cpp -o index.js --use-preload-plugins --bind

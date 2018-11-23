@@ -1,1 +1,0 @@
-emcc index.c -s WASM=1 -o index.js -s EXPORTED_FUNCTIONS="['_report_time']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall']" --js-library js-interop.js
